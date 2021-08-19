@@ -1,0 +1,118 @@
+@use "../globals/colors.scss" as *;
+@use "../globals/fonts.scss" as *;
+
+body{
+   background-color: black;
+  color:white;
+}
+img {
+  //width: 100%;
+  height: 100%;
+}
+.c-cell{
+  height:17rem;
+}
+
+
+.gallery-cell {
+  width: 15%;
+  counter-increment: gallery-cell;
+}
+
+.margin-top-20 {
+  margin-top: 20;
+}
+.w-65{
+  width: 65%;
+}
+
+.container {
+  margin: 0 auto;
+ }
+
+
+
+
+
+
+
+
+
+
+
+// .forHeader{
+//   background-color: $Very-Light-Gray;
+//  margin: 0;
+//  padding: 0;
+// }
+// .whyChoose{
+//   margin-top: 370px;
+// }
+// .HeaderSection{
+//   max-height: 636px;
+// }
+
+// .forimg1{
+//  top: 0;
+//  right: 0;
+//   height: 43.5rem;
+//   margin-right: -7rem;
+//   // position: absolute;
+//   // z-index: 3;
+// }
+
+// .forimg1 img {
+//   // width: 100%;
+//    height: 100%;
+// }
+// .lightFont{
+//   font-family: $font-fam;
+//   font-size: $font-size/1.7;
+//   font-weight:300;
+// }
+// .card-body {
+//   line-height: 20px;
+// }
+// .footer{
+//   background-color: $Dark-Blue;
+// }
+// .regularFont{
+//   font-family: $font-fam;
+//   font-size: $font-size *0.7;
+//   font-weight:400;
+// }
+// .boldFont{
+//   font-family: $font-fam;
+//   font-size: $font-size;
+//   font-weight:700;
+// }
+// .bg-lime{
+//   background-image: linear-gradient(to right, $Lime-Green ,$Bright-Cyan);
+// }
+// .bg-grayesh{
+//   background-color:  $Grayish-Blue;
+// }
+// .my-sm-text{
+//   font-size: 11px;
+// }
+
+// .footer-link{
+//   text-decoration: none;
+//   color: white;
+//   text-align: center;
+// }
+// .card-link{
+//   text-decoration: none;
+//   color: black;
+//   text-align: center;
+  
+// }
+// i:hover,a:hover{
+//   color: $Lime-Green;
+// }
+// #requestBtn:hover{
+//   background-image: linear-gradient(to right, $Lime-Green-light ,$Bright-Cyan-light);
+// }
+// .nav-item:hover{
+//   border-bottom:  $Lime-Green 4px solid;
+// }
