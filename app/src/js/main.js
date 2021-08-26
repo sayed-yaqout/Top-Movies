@@ -1,39 +1,80 @@
-const MOVIES_API_KEY =
+const TOPRATED_API_KEY =
   "https://api.themoviedb.org/3/movie/top_rated?api_key=4ad8cb5b2b8f3f393d5fbb1e73651f69&language=en-US";
+const TRENDING_API_KEY= "https://api.themoviedb.org/3/trending/all/day?api_key=4ad8cb5b2b8f3f393d5fbb1e73651f69";
+const NOWPLAYING_API_KEY="https://api.themoviedb.org/3/movie/now_playing?api_key=4ad8cb5b2b8f3f393d5fbb1e73651f69&language=en-US&page=1";
 
 //============================================================MOVIES API================================================\\
 var moviesComponent = (function () {
   var movies;
-  var gallery = document.querySelector(".gallery");
-  var template = document.getElementById("moviestemp").innerHTML;
+  //========================galleryies
+  var topRatedGallery = document.querySelector(".topRated");
+  var trendingGallery=document.querySelector(".trending");
+  var nowplayingGallery=document.querySelector(".nowPlaying");
+//==========================templates
+  var moviesTemp = document.getElementById("moviestemp").innerHTML;
+  var trendingTemp=document.getElementById("trendingTemp").innerHTML;
+  var nowplayingTemp = document.getElementById("nowplayingTemp");
 
   function init() {
-    fetchData()
+
+
+
+    fetchData(NOWPLAYING_API_KEY)
+    .then(res=>res.json())
+    .then((data) => {
+      renderPlaying(data,nowplayingTemp,nowplayingGallery);
+      initialize_flickity(nowplayingGallery,false);
+    }).catch(err=>console.log(err));
+
+    fetchData(TOPRATED_API_KEY)
       .then((res) => res.json())
       .then((data) => {
-        render(data);
-        initialize_flickity();
-      });
+        render(data,moviesTemp,topRatedGallery);
+        initialize_flickity(topRatedGallery,true)
+      }).catch(err=>console.log(err));
+
+      fetchData(TRENDING_API_KEY)
+      .then((res) => res.json())
+      .then((data) => {
+        render(data,trendingTemp,trendingGallery);
+        initialize_flickity(trendingGallery,true);
+      }).catch(err=>console.log(err));
   }
-  function fetchData() {
-    return fetch(MOVIES_API_KEY);
+
+  function fetchData(key) {
+    return fetch(key);
   }
-  function render(moviesData) {
+  function render(moviesData,temp,gallery) {
     movies = moviesData.results;
     for (var i = 0; i < movies.length; i++) {
-      var rendered = Mustache.render(template, {
+      var rendered = Mustache.render(temp, {
         poster: `https://image.tmdb.org/t/p/w200/${movies[i].poster_path}`,
       });
       gallery.innerHTML += rendered;
     }
   }
-  function initialize_flickity() {
-    var elem = document.querySelector(".gallery");
-    var flkty = new Flickity(elem, {
+  function renderPlaying(moviesData,temp,gallery){
+    console.log(moviesData)
+    movies =moviesData.results;
+
+for (var i = 0; i < movies.length; i++) {
+ // temp.style.backgroundImage=`url("https://image.tmdb.org/t/p/w200/${movies[i].poster_path}")`;
+  var rendered = Mustache.render(temp.innerHTML, {
+    title:movies[i].title
+    , poster: `https://image.tmdb.org/t/p/w500/${movies[i].backdrop_path}`
+  });
+  
+  gallery.innerHTML += rendered;
+}
+  }
+  function initialize_flickity(element,arrows) {
+   
+    var flkty = new Flickity(element, {
       // options
-      wrapAround: true,
+      //wrapAround: true,
+      prevNextButtons: arrows,
       autoPlay: true,
-      prevNextButtons: false,
+     // prevNextButtons: false,
       freeScroll: true,
       contain: true,
       pageDots: false,
